@@ -22,7 +22,7 @@ def Neural_network_numpy():
   print(Y.shape)
 
   plt.scatter(X[:,0], X[:,1],c=Y, s=40, cmap=plt.cm.Spectral)
-
+  plt.show()
   # Funciones de activacion
 
   def sigmoid(x, derivate=False):
