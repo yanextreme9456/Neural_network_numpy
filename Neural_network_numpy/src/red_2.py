@@ -3,7 +3,11 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import make_gaussian_quantiles
 
 def Neural_network_numpy():
-
+  """
+  Implements a simple neural network using NumPy for binary classification.  
+  Generates a dataset, defines activation functions, initializes parameters, and trains the model  
+  using backpropagation and gradient descent. The training error is plotted over iterations.  
+  """
   # Creemos datasets desde cero - Para un ejemplo de clasificacion
   N = 1000
   gaussian_quantiles = make_gaussian_quantiles(
@@ -105,12 +109,17 @@ def Neural_network_numpy():
 
   layers_dims = [2, 6, 10, 1]
   params = initialize_parameters_deep(layers_dims)
-  error = []
+  errors = []
 
-  for _ in range(50000):
+  for _ in range(10000):
       output = train(X, 0.001, params)
       if _%50==0:
           print(mse(Y,output))
-          error.append(mse(Y,output))
+          errors.append(mse(Y,output))
+  plt.plot(errors)
+  data_test_x=(np.random.rand(1000,2)*2)-1
+  data_test_y = train(data_test_x,0.0001,params,training=False)
+  y= np.where(data_test_y>>0.5,1,0)
+  plt.scatter(data_test_x[:,0], data_test_x[:,1],c=y, s=40, cmap=plt.cm.Spectral)
 
 
