@@ -24,9 +24,10 @@ def Neural_network_numpy():
 
   print(X.shape)
   print(Y.shape)
-
+  plt.figure()
   plt.scatter(X[:,0], X[:,1],c=Y, s=40, cmap=plt.cm.Spectral)
   plt.show()
+  
   # Funciones de activacion
 
   def sigmoid(x, derivate=False):
@@ -111,7 +112,7 @@ def Neural_network_numpy():
   params = initialize_parameters_deep(layers_dims)
   errors = []
 
-  for _ in range(10000):
+  for _ in range(50000):
       output = train(X, 0.001, params)
       if _%50==0:
           print(mse(Y,output))
@@ -119,7 +120,9 @@ def Neural_network_numpy():
   plt.plot(errors)
   data_test_x=(np.random.rand(1000,2)*2)-1
   data_test_y = train(data_test_x,0.0001,params,training=False)
-  y= np.where(data_test_y>>0.5,1,0)
+  y= np.where(data_test_y>0.5,1,0)
+  plt.figure()
   plt.scatter(data_test_x[:,0], data_test_x[:,1],c=y, s=40, cmap=plt.cm.Spectral)
+  plt.show()
 
 
